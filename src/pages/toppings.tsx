@@ -1,5 +1,6 @@
+import StyledButtons from "@/components/Buttons";
 import { useAppContext } from "@/context";
-import { Box, Button, List, ListItem, Typography } from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -28,22 +29,8 @@ const containerVariant = {
   },
 };
 
-const buttonVariants = {
-  hover: {
-    scale: 1.1,
-    textShadow: "0px 0px 8px rgb(255,255,255)",
-    boxShadow: "0px 0px 8px rgb(255,255,255)",
-    transition: {
-      duration: 0.3,
-      repeat: Infinity,
-      repeatType: "reverse",
-    },
-  },
-};
-
 const Toppings = () => {
   const { addTopping, pizza } = useAppContext();
-  const MotionButton = motion(Button);
   const MotionTypography = motion(Typography);
 
   const router = useRouter();
@@ -127,19 +114,18 @@ const Toppings = () => {
               })}
             </List>
 
-            <MotionButton
-              variants={buttonVariants as any}
-              whileHover="hover"
-              sx={{
+            <StyledButtons
+              name={"Order"}
+              handleClick={handleNavigation}
+              style={{
                 color: "white",
                 borderColor: "white",
-                borderRadius: 10,
+                border: "2px solid #fff",
+                borderRadius: 20,
+                margin: "10px 20px 0px 0px",
+                padding: "6px 30px",
               }}
-              variant="outlined"
-              color="inherit"
-              onClick={handleNavigation}>
-              Order
-            </MotionButton>
+            />
           </Box>
         </motion.div>
       )}
