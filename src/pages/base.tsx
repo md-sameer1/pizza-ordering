@@ -1,10 +1,9 @@
-import { Box, Button, List, ListItem, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import Layout from "./layout";
+import StyledButtons from "@/components/Buttons";
 import { useAppContext } from "@/context";
-import { useRouter } from "next/router";
+import { List, ListItem, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
-import { Opacity } from "@mui/icons-material";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const containerVariant = {
   hidden: {
@@ -18,27 +17,6 @@ const containerVariant = {
       type: "spring",
       delay: 0.5,
       stiffness: 120,
-    },
-  },
-  exit: {
-    x: "-100vw",
-    opacity: 0,
-    transition: {
-      ease: "easeInOut",
-      duration: 0.5,
-    },
-  },
-};
-
-const containerVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 0.5,
-      duration: 1.5,
     },
   },
   exit: {
@@ -65,23 +43,9 @@ const nextVariant = {
   },
 };
 
-const buttonVariants = {
-  hover: {
-    scale: 1.1,
-    textShadow: "0px 0px 8px rgb(255,255,255)",
-    boxShadow: "0px 0px 8px rgb(255,255,255)",
-    transition: {
-      duration: 0.5,
-      repeat: Infinity,
-      repeatType: "reverse",
-    },
-  },
-};
-
 const Base = () => {
   const { addBase, pizza } = useAppContext();
   const router = useRouter();
-  const MotionButton = motion(Button);
   const MotionTypography = motion(Typography);
 
   const bases = ["Classic", "Thin & Crispy", "Thick Crust"];
@@ -157,19 +121,18 @@ const Base = () => {
 
           {pizza?.base && (
             <motion.div variants={nextVariant}>
-              <MotionButton
-                variants={buttonVariants as any}
-                whileHover="hover"
-                sx={{
+              <StyledButtons
+                name={"Next"}
+                handleClick={handleNavigation}
+                style={{
                   color: "white",
                   borderColor: "white",
-                  borderRadius: 10,
+                  border: "2px solid #fff",
+                  borderRadius: 20,
+                  margin: "10px 20px 0px 0px",
+                  padding: "6px 30px",
                 }}
-                variant="outlined"
-                color="inherit"
-                onClick={handleNavigation}>
-                Next
-              </MotionButton>
+              />
             </motion.div>
           )}
         </motion.div>
